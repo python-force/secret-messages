@@ -1,7 +1,15 @@
 from colorama import Fore, Back, Style
 from caesar import Cipher, Caesar
+from adfgvx import Adfgvx
 
-encryption_dict = {1: "Caesar", 2: "Dude"}
+encryption_dict = {1: "Caesar", 2: "Adfgvx"}
+phrase = ""
+crypting_phrase = ""
+
+def crypting_result(crypting_phrase):
+    print(Fore.BLUE, "The phrase > " + phrase)
+    print(Fore.GREEN, "Was successfully sent to U-Boat 571 > " + crypting_phrase)
+    print(Fore.WHITE, "Have a wonderful day")
 
 def enc_list():
     for key, value in encryption_dict.items():
@@ -16,23 +24,26 @@ def enc_selected():
 
 def encrypt_the_phrase(phrase, i):
     if i == 1:
-        x = Caesar().encrypt(phrase)
-        x = x.split(" ")
-        x = ''.join(x)
-        x = x[:5] + " " + x[5:10] + " " + x[10:15] + " " + x[15:20] + " " + x[20:25] + " " + x[30:35] + " " + x[35:]
-
-        print(Fore.BLUE, "The phrase > " + phrase)
-        print(Fore.GREEN, "Was successfully sent to U-Boat 571 > " + x)
-        print(Fore.WHITE, "Have a wonderful day")
-    else:
-        print("Duuuh")
+        crypting_phrase = Caesar().encrypt(phrase)
+        """
+        crypting_phrase = crypting_phrase.split(" ")
+        crypting_phrase = ''.join(crypting_phrase)
+        crypting_phrase = crypting_phrase[:5] + " " + crypting_phrase[5:10] + " " + crypting_phrase[10:15] + " " + crypting_phrase[15:20] + " " + crypting_phrase[20:25] + " " + crypting_phrase[30:35] + " " + crypting_phrase[35:]
+        """
+        crypting_result(crypting_phrase)
+    elif i == 2:
+        crypting_phrase = Adfgvx().encrypt(phrase)
+        crypting_result(crypting_phrase)
 
 def decrypt_the_phrase(phrase, i):
+    cls = ""
     if i == 1:
-        x = Caesar().decrypt(phrase)
-        print(Fore.BLUE, "The phrase > " + phrase)
-        print(Fore.GREEN, "Was successfully sent to U-Boat 571 > " + x)
-        print(Fore.WHITE, "Have a wonderful day")
+        cls = Caesar()
+    elif i == 2:
+        cls = Adfgvx()
+
+    crypting_phrase = cls.decrypt(phrase)
+    crypting_result(crypting_phrase)
 
 
 while True:
