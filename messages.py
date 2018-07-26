@@ -1,8 +1,10 @@
 from colorama import Fore, Back, Style
-from caesar import Cipher, Caesar
+from caesar import Caesar
 from adfgvx import Adfgvx
+from keywordcipher import Keycipher
+from atbash import Atbash
 
-encryption_dict = {1: "Caesar", 2: "Adfgvx"}
+encryption_dict = {1: "Caesar", 2: "Adfgvx", 3: "Keycipher", 4: "Atbash"}
 phrase = ""
 crypting_phrase = ""
 
@@ -22,26 +24,30 @@ def enc_selected():
             print(value.capitalize() + " it is.")
             return key
 
-def encrypt_the_phrase(phrase, i):
-    if i == 1:
-        crypting_phrase = Caesar().encrypt(phrase)
-        """
-        crypting_phrase = crypting_phrase.split(" ")
-        crypting_phrase = ''.join(crypting_phrase)
-        crypting_phrase = crypting_phrase[:5] + " " + crypting_phrase[5:10] + " " + crypting_phrase[10:15] + " " + crypting_phrase[15:20] + " " + crypting_phrase[20:25] + " " + crypting_phrase[30:35] + " " + crypting_phrase[35:]
-        """
-        crypting_result(crypting_phrase)
-    elif i == 2:
-        crypting_phrase = Adfgvx().encrypt(phrase)
-        crypting_result(crypting_phrase)
-
-def decrypt_the_phrase(phrase, i):
+def encryption(i):
     cls = ""
     if i == 1:
         cls = Caesar()
     elif i == 2:
         cls = Adfgvx()
+    elif i == 3:
+        cls = Keycipher()
+    elif i == 4:
+        cls = Atbash()
+    return cls
 
+def encrypt_the_phrase(phrase, i):
+    cls = encryption(i)
+    crypting_phrase = cls.encrypt(phrase)
+    crypting_result(crypting_phrase)
+    """
+    crypting_phrase = crypting_phrase.split(" ")
+    crypting_phrase = ''.join(crypting_phrase)
+    crypting_phrase = crypting_phrase[:5] + " " + crypting_phrase[5:10] + " " + crypting_phrase[10:15] + " " + crypting_phrase[15:20] + " " + crypting_phrase[20:25] + " " + crypting_phrase[30:35] + " " + crypting_phrase[35:]
+    """
+
+def decrypt_the_phrase(phrase, i):
+    cls = encryption(i)
     crypting_phrase = cls.decrypt(phrase)
     crypting_result(crypting_phrase)
 
