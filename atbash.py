@@ -11,32 +11,24 @@ class Atbash(Monoalphabetic):
             dict[self.alpha_list[i]] = backwards_list[i]
         return (dict)
 
+    def encrypt_decrypt(self, message):
+        if self.check_message(message):
+            phrase = message.upper().split()
+            main_dict = self.cipher_string()
+            new_list = []
+            for item in phrase:
+                word = []
+                for ch in item:
+                    for key, value in main_dict.items():
+                        if ch in value:
+                            word.append(key)
+                word = "".join(word)
+                new_list.append(word)
+            return new_list
+
     def encrypt(self, message):
-        main_dict = self.cipher_string()
-        phrase = message.upper().split()
-        new_list = []
-        for item in phrase:
-            word = []
-            for ch in item:
-                for key, value in main_dict.items():
-                    if ch in value:
-                        word.append(key)
-            word = "".join(word)
-            new_list.append(word)
-        return " ".join(new_list)
+        return " ".join(self.encrypt_decrypt(message))
 
 
     def decrypt(self, message):
-        main_dict = self.cipher_string()
-        phrase = message.upper().split()
-
-        new_list = []
-        for item in phrase:
-            word = []
-            for ch in item:
-                for key, value in main_dict.items():
-                    if ch in key:
-                        word.append(value)
-            word = "".join(word)
-            new_list.append(word)
-        return " ".join(new_list)
+        return " ".join(self.encrypt_decrypt(message))

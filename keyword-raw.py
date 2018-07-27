@@ -19,8 +19,8 @@ def CipherString(keyword):
         dict[alpha_list[i]] = cipher_list[i]
     return(dict)
 
-main_dict=CipherString("PREDATO")
-phrase = "GET TO THE CHOPAAAAAH"
+main_dict=CipherString("POTA")
+phrase = "HELLO THERE"
 phrase = phrase.split()
 new_list=[]
 for item in phrase:
@@ -33,8 +33,8 @@ for item in phrase:
     new_list.append(word)
 print(new_list)
 
-main_dict=CipherString("PREDATO")
-phrase = "KCF FG FLC ILGAEEEEEL"
+main_dict=CipherString("POTA")
+phrase = "KHOOB CKHSH"
 phrase = phrase.split()
 
 new_list=[]
