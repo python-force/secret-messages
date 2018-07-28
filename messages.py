@@ -190,6 +190,7 @@ if __name__ == '__main__':
             # Based on the selection encryption will happen
             # or decrytpion with OTP decrytpion first, if it was chosen while
             # encryption process
+            # Validation of user's input
             try:
                 if int(type) == 1:
                     encrypt_the_phrase(phrase, i)
@@ -208,6 +209,7 @@ if __name__ == '__main__':
                 wrong_input()
 
             # Ask user if to continue with more messages
+            # break if keep trying wrong answers
             ask = input("Continue? y/n ")
             if ask == "n":
                 break
