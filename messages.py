@@ -147,6 +147,10 @@ def decrypt_the_phrase(phrase, i):
 
 
 def clear_screen():
+    """
+    Clear screen
+    :return:
+    """
     if os.system == "nt":
         os.system('cls')
     else:
