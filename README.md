@@ -42,3 +42,6 @@ This OTP will as well generate a strong key that corresponds to each message and
 
 http://users.telenet.be/d.rijmenants/en/onetimepad.htm
 
+## 6. Tests
+
+Test folder contains raw code for testing the values - is not included in the main code anywhere
