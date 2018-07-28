@@ -227,4 +227,4 @@ if __name__ == '__main__':
             clear_screen()
             print("Please check your selection.")
 
-    print("Done Coding")
+    print("Done Coding - No more messages to send")
