@@ -121,7 +121,7 @@ class Otp(Cipher):
         # message = message.upper().split()
         # message = "".join(message)
         # desalting the message to remove 5 characters blocks
-        padding = input("Have you used 5 chars? y/n ")
+        padding = input("Have you used 5 characters blocks? y/n ")
         if padding == "y":
             message = message.replace(" ", "")
             message = self.desalt_random(message)
