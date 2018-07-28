@@ -16,6 +16,24 @@ class Otp(Cipher):
         "Y": (24, 51), "Z": (25, 52), " ": (26, 26)
     }
 
+    random_ch = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "{", "}", "]", "[", "?"]
+
+    def salt_with_random(self, math_list):
+        for i, item in enumerate(math_list):
+            if item == " ":
+                math_list[i] = random.choice(self.random_ch)
+        return math_list
+
+    def desalt_random(self, message):
+        message_char = []
+        for ch in message:
+            message_char.append(ch)
+        for i, item in enumerate(message_char):
+            if item in self.random_ch:
+                message_char[i] = " "
+        return message_char
+
+
     def encrypt(self, message):
         # message = message.upper().split()
         # message = "".join(message)
@@ -56,12 +74,20 @@ class Otp(Cipher):
                         math_list[i] = key
 
         print(math_list)
+        padding = input("Would you like 5 chars? y/n")
+        if padding == "y":
+            math_list = self.salt_with_random(math_list)
         return "".join(math_list)
 
 
     def decrypt(self, message):
         # message = message.upper().split()
         # message = "".join(message)
+        padding = input("Have you used 5 chars? y/n")
+        if padding == "y":
+            message_char = self.desalt_random(message)
+            message = "".join(message_char)
+
         message = message.upper()
         message_list=[]
         for ch in message:
