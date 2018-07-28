@@ -65,6 +65,8 @@ def check_phrase(crypting_phrase, encryption):
             if otp_selection == "y":
                 result = otp_encryption(crypting_phrase)
                 crypting_result(result)
+            else:
+                crypting_result(crypting_phrase)
         else:
             crypting_result(crypting_phrase)
 

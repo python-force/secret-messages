@@ -56,6 +56,7 @@ class Adfgvx(Cipher):
 
     def decrypt(self, message):
         secret = message.split()
+        print(secret)
         password = input("Enter the Password: ")
         sorted_list = sorted(password)
         print(sorted_list)
