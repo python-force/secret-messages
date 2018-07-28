@@ -199,10 +199,13 @@ if __name__ == '__main__':
                     if otp_decrypt_selection == "n":
                         decrypt_the_phrase(phrase, i)
                     else:
+                        decrypt_the_phrase(otp_decrypt(phrase), i)
+                        """
                         if otp_decrypt(phrase) is not None:
                             decrypt_the_phrase(otp_decrypt(phrase), i)
                         else:
                             wrong_input()
+                        """
                 else:
                     wrong_input()
             except:

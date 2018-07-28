@@ -34,42 +34,47 @@ class Adfgvx(Cipher):
 
         # asks users for password
         password = input("What is the password? All characters must be unique.")
-        x = len(step) // len(password)
-        x_mod = len(step) % len(password)
-        if x_mod != 0:
-            x = x + 1
-
-        # based on the mod result, rows are being created
-        rows = []
-        for i in range(0, x):
-            if x_mod != 0:
-                if i == x:
-                    rows.append(step[len(password) * i:])
-                else:
-                    rows.append(step[len(password) * i:len(password) * i + len(password)])
+        for ch in password:
+            occurences = password.count(ch)
+            if occurences > 1:
+                print("Your password includes duplicates. They are not unique characters.")
+                return None
             else:
-                rows.append(step[len(password) * i:len(password) * i + len(password)])
+                x = len(step) // len(password)
+                x_mod = len(step) % len(password)
+                if x_mod != 0:
+                    x = x + 1
 
+                # based on the mod result, rows are being created
+                rows = []
+                for i in range(0, x):
+                    if x_mod != 0:
+                        if i == x:
+                            rows.append(step[len(password) * i:])
+                        else:
+                            rows.append(step[len(password) * i:len(password) * i + len(password)])
+                    else:
+                        rows.append(step[len(password) * i:len(password) * i + len(password)])
 
-        # creating columns of strings
-        dict = {}
-        for i in range(0, len(password)):
-            list = []
-            for item in rows:
-                try:
-                    if item[i]:
-                        list.append(item[i])
-                except:
-                    continue
-            final_string = "".join(list)
-            dict[password[i] + str(i)] = final_string
+                # creating columns of strings
+                dict = {}
+                for i in range(0, len(password)):
+                    list = []
+                    for item in rows:
+                        try:
+                            if item[i]:
+                                list.append(item[i])
+                        except:
+                            continue
+                    final_string = "".join(list)
+                    dict[password[i] + str(i)] = final_string
 
-        # sort the list of columns based on the password
-        sorted_list = []
-        for key in sorted(dict):
-            sorted_list.append(dict[key])
+                # sort the list of columns based on the password
+                sorted_list = []
+                for key in sorted(dict):
+                    sorted_list.append(dict[key])
 
-        return " ".join(sorted_list)
+                return " ".join(sorted_list)
 
     def decrypt(self, message):
         """
@@ -80,48 +85,54 @@ class Adfgvx(Cipher):
         """
         secret = message.split()
         password = input("Please enter the password for the message: ")
-        sorted_list = sorted(password)
-
-        # Dictionary with keys and values bases on the password and indexes
-        dict = {}
-        for i in range(0, len(secret)):
-            try:
-                dict[sorted_list[i] + str(password.index(sorted_list[i]))] = secret[i]
-            except:
-                continue
-
-        # Sorting all characters and combine all together
-        new_list = []
         for ch in password:
-            key = ch + str(password.index(ch))
-            if key in dict.keys():
-                new_list.append(dict[key])
-        whole_message = "".join(new_list)
+            occurences = password.count(ch)
+            if occurences > 1:
+                print("Your password includes duplicates. It it not correct")
+                return None
+            else:
+                sorted_list = sorted(password)
 
-        y = len(whole_message) // len(password)
-        y_mod = len(whole_message) % len(password)
-        if y_mod != 0:
-            y = y + 1
+                # Dictionary with keys and values bases on the password and indexes
+                dict = {}
+                for i in range(0, len(secret)):
+                    try:
+                        dict[sorted_list[i] + str(password.index(sorted_list[i]))] = secret[i]
+                    except:
+                        continue
 
-        # Sorting the columns / rows to make the original string
-        total_list = []
-        for i in range(0, y):
-            for item in new_list:
-                try:
-                    total_list.append(item[i])
-                except:
-                    continue
-        total_list = "".join(total_list)
+                # Sorting all characters and combine all together
+                new_list = []
+                for ch in password:
+                    key = ch + str(password.index(ch))
+                    if key in dict.keys():
+                        new_list.append(dict[key])
+                whole_message = "".join(new_list)
 
-        # Creating the keys (double keys)
-        double_list = []
-        for i in range(0, len(total_list), 2):
-            double_list.append(total_list[i:i + 2])
+                y = len(whole_message) // len(password)
+                y_mod = len(whole_message) % len(password)
+                if y_mod != 0:
+                    y = y + 1
 
-        # Message created from the main dictionary based on double_list keys
-        message = []
-        for item in double_list:
-            if item in self.ADFGVX.keys():
-                message.append(self.ADFGVX[item])
-        message = "".join(message)
-        return message
+                # Sorting the columns / rows to make the original string
+                total_list = []
+                for i in range(0, y):
+                    for item in new_list:
+                        try:
+                            total_list.append(item[i])
+                        except:
+                            continue
+                total_list = "".join(total_list)
+
+                # Creating the keys (double keys)
+                double_list = []
+                for i in range(0, len(total_list), 2):
+                    double_list.append(total_list[i:i + 2])
+
+                # Message created from the main dictionary based on double_list keys
+                message = []
+                for item in double_list:
+                    if item in self.ADFGVX.keys():
+                        message.append(self.ADFGVX[item])
+                message = "".join(message)
+                return message
