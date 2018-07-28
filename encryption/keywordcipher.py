@@ -1,5 +1,4 @@
-from caesar import Cipher
-from monoalphabetic import Monoalphabetic
+from encryption.monoalphabetic import Monoalphabetic
 
 class Keycipher(Monoalphabetic):
 

@@ -1,4 +1,4 @@
-from caesar import Cipher
+from encryption.caesar import Cipher
 
 class Adfgvx(Cipher):
     ADFGVX = {

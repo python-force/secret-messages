@@ -1,5 +1,5 @@
-from caesar import Cipher
-from monoalphabetic import Monoalphabetic
+from encryption.caesar import Cipher
+from encryption.monoalphabetic import Monoalphabetic
 
 class Atbash(Monoalphabetic):
 

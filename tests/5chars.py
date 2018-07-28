@@ -8,8 +8,6 @@ print(block_list)
 text = "KQJML XJEER E#TX! NKPRS FSOCR ECYPX S"
 print(text.replace(" ",""))
 
-
-
-list1 = ['g','e','e','k', 's']
+list1 = ['g','e','e','k','s']
 print("".join(list1))
 
