@@ -52,6 +52,8 @@ class Adfgvx(Cipher):
         sorted_list = []
         for key in sorted(dict):
             sorted_list.append(dict[key])
+        print("THIS IS THE RESULT: ")
+        print(" ".join(sorted_list))
         return " ".join(sorted_list)
 
     def decrypt(self, message):

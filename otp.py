@@ -9,16 +9,17 @@ class Otp(Cipher):
         alphabet_list.append(ch)
     print(alphabet_list)
     main_dict = {
-        "A": (0, 26), "B": (1, 27), "C": (2, 28), "D": (3, 29), "E": (4, 30), "F": (5, 31),
-        "G": (6, 32), "H": (7, 33), "I": (8, 34), "J": (9, 35), "K": (10, 36), "L": (11, 37),
-        "M": (12, 38), "N": (13, 39), "O": (14, 40), "P": (15, 41), "Q": (16, 42), "R": (17, 43),
-        "S": (18, 44), "T": (19, 45), "U": (20, 46), "V": (21, 47), "W": (22, 48), "X": (23, 49),
-        "Y": (24, 50), "Z": (25, 25)
+        "A": (0, 27), "B": (1, 28), "C": (2, 29), "D": (3, 30), "E": (4, 31), "F": (5, 32),
+        "G": (6, 33), "H": (7, 34), "I": (8, 35), "J": (9, 36), "K": (10, 37), "L": (11, 38),
+        "M": (12, 39), "N": (13, 40), "O": (14, 41), "P": (15, 42), "Q": (16, 43), "R": (17, 44),
+        "S": (18, 45), "T": (19, 46), "U": (20, 47), "V": (21, 48), "W": (22, 49), "X": (23, 50),
+        "Y": (24, 51), "Z": (25, 52), " ": (26, 26)
     }
 
     def encrypt(self, message):
-        message = message.upper().split()
-        message = "".join(message)
+        # message = message.upper().split()
+        # message = "".join(message)
+        message = message.upper()
         message_list = []
         for ch in message:
             message_list.append(self.main_dict[ch][0])
@@ -59,8 +60,9 @@ class Otp(Cipher):
 
 
     def decrypt(self, message):
-        message = message.upper().split()
-        message = "".join(message)
+        # message = message.upper().split()
+        # message = "".join(message)
+        message = message.upper()
         message_list=[]
         for ch in message:
             message_list.append(self.main_dict[ch][0])
@@ -75,7 +77,7 @@ class Otp(Cipher):
 
         math_list = []
         for i, item in enumerate(message_list):
-            if message_list[i] > random_otp[i]:
+            if message_list[i] >= random_otp[i]:
                 x = message_list[i] - random_otp[i]
                 for key, value in self.main_dict.items():
                     if value[0] == x:
