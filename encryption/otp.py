@@ -25,6 +25,11 @@ class Otp(Cipher):
                  "*", "(", ")", "{", "}", "]", "[", "?"]
 
     def salt_with_random(self, math_list):
+        """
+        Pick random characters and salt the message to know where the spaces are for proper encryption
+        :param math_list:
+        :return:
+        """
         for i, item in enumerate(math_list):
             if item == " ":
                 math_list[i] = random.choice(self.random_ch)
@@ -37,6 +42,11 @@ class Otp(Cipher):
         return block_list
 
     def desalt_random(self, message):
+        """
+        Remove random characters to unlock the message for decryption
+        :param math_list:
+        :return:
+        """
         message_char = []
         for ch in message:
             message_char.append(ch)
@@ -46,6 +56,13 @@ class Otp(Cipher):
         return message_char
 
     def encrypt(self, message):
+        """
+        One Time Pad Encryption
+        Generate a random key and encrypt the message with it with mod 27 (using " " as extra character)
+        Full Algorithm Source: http://users.telenet.be/d.rijmenants/en/onetimepad.htm
+        :param message:
+        :return:
+        """
         # message = message.upper().split()
         # message = "".join(message)
         message = message.upper()
@@ -58,9 +75,11 @@ class Otp(Cipher):
         print("Your OTP is: " + str("".join(random_otp)))
         print("Use the OTP to unlock the message.")
 
+        # Convert Random key to integers
         for i, item in enumerate(random_otp):
             random_otp[i] = self.main_dict[item][0]
 
+        # Do the math with Random Key and the message
         math_list = []
         for i, item in enumerate(message_list):
             try:
@@ -70,6 +89,7 @@ class Otp(Cipher):
                 print("The message and OTP does not have the same length")
                 continue
 
+        # Logic to do mod27
         for i, item in enumerate(math_list):
             for key, value in self.main_dict.items():
                 if item > 26:
@@ -79,6 +99,7 @@ class Otp(Cipher):
                     if value[0] == item:
                         math_list[i] = key
 
+        # Algorithm for 5 block characters
         padding = input("Would you like to use block 5 characters? y/n ")
         if padding == "y":
             math_list = self.salt_with_random(math_list)
@@ -88,8 +109,18 @@ class Otp(Cipher):
             return math_list
 
     def decrypt(self, message):
+        """
+        One Time Pad Decryption
+        Removing random characters to desalt the message
+        Logic to decrypt the message with OTP
+        Decrypt by mod27
+        Full Algorithm Source: http://users.telenet.be/d.rijmenants/en/onetimepad.htm
+        :param message:
+        :return:
+        """
         # message = message.upper().split()
         # message = "".join(message)
+        # desalting the message to remove 5 characters blocks
         padding = input("Have you used 5 chars? y/n")
         if padding == "y":
             message = message.replace(" ", "")
@@ -101,6 +132,7 @@ class Otp(Cipher):
         for ch in message:
             message_list.append(self.main_dict[ch][0])
 
+        # OTP Encryption / process the message with OTP
         otp = input("What is the OTP that was generated for you during "
                     "encryption process?: ")
         otp = otp.upper()
@@ -108,6 +140,7 @@ class Otp(Cipher):
         for ch in otp:
             random_otp.append(self.main_dict[ch][0])
 
+        # If OTP is correct, decrypt the message with mod27
         if len(message_list) != len(random_otp):
             print("You typed a wrong OTP.")
             return None
