@@ -71,12 +71,11 @@ class Otp(Cipher):
                 continue
 
         for i, item in enumerate(math_list):
-            if item > 26:
-                for key, value in self.main_dict.items():
+            for key, value in self.main_dict.items():
+                if item > 26:
                     if value[1] == item:
                         math_list[i] = key
-            else:
-                for key, value in self.main_dict.items():
+                else:
                     if value[0] == item:
                         math_list[i] = key
 
