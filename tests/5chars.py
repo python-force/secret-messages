@@ -11,3 +11,7 @@ print(text.replace(" ",""))
 list1 = ['g','e','e','k','s']
 print("".join(list1))
 
+list = ['Z', 'X', 'I', 'D', 'E', 'A', 'S', 'O', 'A', 'N', 'V', 'O', ' ', 'L', 'L', 'P', 'R', 'B', 'Z', 'S', 'F', 'I', 'R', 'Y', 'N', ' ', 'Y', 'Z', 'I', 'Q']
+list = "".join(list)
+print(list)
+

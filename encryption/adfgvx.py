@@ -1,5 +1,6 @@
 from encryption.caesar import Cipher
 
+
 class Adfgvx(Cipher):
     ADFGVX = {
         "AA": "N", "AD": "A", "AF": "1", "AG": "C", "AV": "3", "AX": "H",
@@ -21,7 +22,7 @@ class Adfgvx(Cipher):
                     step.append(keys)
         step = "".join(step)
 
-        password = input("What is the password? ")
+        password = input("What is the password? All characters must be unique.")
         x = len(step) // len(password)
         x_mod = len(step) % len(password)
         if x_mod != 0:
@@ -45,30 +46,27 @@ class Adfgvx(Cipher):
                     if item[i]:
                         list.append(item[i])
                 except:
-                    pass
+                    continue
             final_string = "".join(list)
             dict[password[i] + str(i)] = final_string
 
         sorted_list = []
         for key in sorted(dict):
             sorted_list.append(dict[key])
-        print("THIS IS THE RESULT: ")
-        print(" ".join(sorted_list))
+
         return " ".join(sorted_list)
 
     def decrypt(self, message):
         secret = message.split()
-        print(secret)
-        password = input("Enter the Password: ")
+        password = input("Please enter the password for the message: ")
         sorted_list = sorted(password)
-        print(sorted_list)
 
         dict = {}
         for i in range(0, len(secret)):
             try:
                 dict[sorted_list[i] + str(password.index(sorted_list[i]))] = secret[i]
             except:
-                pass
+                continue
 
         new_list = []
         for ch in password:
@@ -88,7 +86,7 @@ class Adfgvx(Cipher):
                 try:
                     total_list.append(item[i])
                 except:
-                    pass
+                    continue
         total_list = "".join(total_list)
 
         double_list = []

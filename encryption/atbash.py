@@ -1,5 +1,5 @@
-from encryption.caesar import Cipher
 from encryption.monoalphabetic import Monoalphabetic
+
 
 class Atbash(Monoalphabetic):
 
@@ -28,7 +28,6 @@ class Atbash(Monoalphabetic):
 
     def encrypt(self, message):
         return " ".join(self.encrypt_decrypt(message))
-
 
     def decrypt(self, message):
         return " ".join(self.encrypt_decrypt(message))

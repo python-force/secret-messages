@@ -1,5 +1,6 @@
 from encryption.monoalphabetic import Monoalphabetic
 
+
 class Keycipher(Monoalphabetic):
 
     def cipher_string(self, keyword):
@@ -39,10 +40,11 @@ class Keycipher(Monoalphabetic):
         return " ".join(new_list)
 
     def encrypt(self, message):
-        codeword = input("Please specify the codeword, all characters must be unique: ")
+        codeword = input("Please specify the codeword, "
+                         "all characters must be unique: ")
         return self.encrypt_decrypt(codeword, message, "encrypt")
 
-
     def decrypt(self, message):
-        codeword = input("Please specify the codeword, to decrypt the message: ")
+        codeword = input("Please specify the codeword, "
+                         "to decrypt the message: ")
         return self.encrypt_decrypt(codeword, message, "decrypt")

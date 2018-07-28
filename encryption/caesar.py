@@ -1,11 +1,13 @@
 import string
 
+
 class Cipher:
     def encrypt(self):
         raise NotImplementedError()
 
     def decrypt(self):
         raise NotImplementedError()
+
 
 class Caesar(Cipher):
     FORWARD = string.ascii_uppercase * 3
@@ -38,17 +40,3 @@ class Caesar(Cipher):
             else:
                 output.append(self.BACKWARD[index-self.offset])
         return ''.join(output)
-
-
-"""
-phrase = input("What phrase you would like me to process? ")
-
-x = Caesar().encrypt(phrase)
-x = x.split(" ")
-x = ''.join(x)
-x = x[:5] + " " + x[5:10] + " " + x[10:15] + " " + x[15:20] + " " + x[20:25] + " " + x[30:35] + " " + x[35:]
-
-print (Fore.BLUE, "The phrase > " + phrase)
-print (Fore.GREEN, "Was successfully sent to U-Boat 571 > " + x)
-print (Fore.WHITE, "Have a wonderful day")
-"""
