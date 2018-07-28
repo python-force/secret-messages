@@ -4,6 +4,11 @@ from encryption.monoalphabetic import Monoalphabetic
 class Atbash(Monoalphabetic):
 
     def cipher_string(self):
+        """
+        Flipping alphabet list and creating dictionary
+        with corresponding keys and values
+        :return:
+        """
         backwards_list = self.alpha_list[::-1]
 
         dict = {}
@@ -12,6 +17,12 @@ class Atbash(Monoalphabetic):
         return (dict)
 
     def encrypt_decrypt(self, message):
+        """
+        Atbash encrypt/decrypt algorithm
+        Encrypting and Decrypting based on flipped alphabet dictionary
+        :param message:
+        :return:
+        """
         if self.check_message(message):
             phrase = message.upper().split()
             main_dict = self.cipher_string()
@@ -27,7 +38,17 @@ class Atbash(Monoalphabetic):
             return new_list
 
     def encrypt(self, message):
+        """
+        Encrypt the message
+        :param message:
+        :return:
+        """
         return " ".join(self.encrypt_decrypt(message))
 
     def decrypt(self, message):
+        """
+        Decrypt the message
+        :param message:
+        :return:
+        """
         return " ".join(self.encrypt_decrypt(message))
