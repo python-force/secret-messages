@@ -20,6 +20,7 @@ class Atbash(Monoalphabetic):
         """
         Atbash encrypt/decrypt algorithm
         Encrypting and Decrypting based on flipped alphabet dictionary
+        Full Algorithm here: https://en.wikipedia.org/wiki/Atbash
         :param message:
         :return:
         """

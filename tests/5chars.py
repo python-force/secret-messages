@@ -15,3 +15,14 @@ list = ['Z', 'X', 'I', 'D', 'E', 'A', 'S', 'O', 'A', 'N', 'V', 'O', ' ', 'L', 'L
 list = "".join(list)
 print(list)
 
+
+text = "hello"
+
+for ch in text:
+    occurences = text.count(ch)
+    if occurences > 1:
+        print(ch)
+        print("not good")
+
+
+
