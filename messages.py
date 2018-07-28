@@ -112,12 +112,15 @@ def check_phrase(crypting_phrase, encryption):
         crypting_result(crypting_phrase)
     else:
         if encryption == "encrypt":
-            otp_selection = input("Would you like to use OTP? y/n")
+            otp_selection = input("Would you like to use OTP? y/n ")
             if otp_selection == "y":
                 result = otp_encryption(crypting_phrase)
                 crypting_result(result)
-            else:
+            elif otp_selection == "n":
                 crypting_result(crypting_phrase)
+            else:
+                crypting_result("Cipher is unable to be processed. " \
+                                "Please check your message.")
         else:
             crypting_result(crypting_phrase)
 
@@ -156,10 +159,16 @@ def clear_screen():
     else:
         os.system('clear')
 
+def wrong_input():
+    crypting_phrase = "Cipher is unable to be processed. " \
+                      "Please check your message."
+    crypting_result(crypting_phrase)
+
 # Script doesn't execute when imported
 if __name__ == '__main__':
     # The script will keep running till the user is satisfied
     while True:
+        clear_screen()
         # show the list of the encryption methods
         enc_list()
 
@@ -181,26 +190,32 @@ if __name__ == '__main__':
             # Based on the selection encryption will happen
             # or decrytpion with OTP decrytpion first, if it was chosen while
             # encryption process
-            if int(type) == 1:
-                encrypt_the_phrase(phrase, i)
-            else:
-                otp_decrypt_selection = input("Have you used to OPT to encrypt the message? y/n ")
-                if otp_decrypt_selection == "n":
-                    decrypt_the_phrase(phrase, i)
-                else:
-                    if otp_decrypt(phrase) is not None:
-                        decrypt_the_phrase(otp_decrypt(phrase), i)
+            try:
+                if int(type) == 1:
+                    encrypt_the_phrase(phrase, i)
+                elif int(type) == 2:
+                    otp_decrypt_selection = input("Have you used to OPT to encrypt the message? y/n ")
+                    if otp_decrypt_selection == "n":
+                        decrypt_the_phrase(phrase, i)
                     else:
-                        crypting_phrase = "Cipher is unable to be processed. " \
-                                          "Please check your message."
-                        crypting_result(crypting_phrase)
+                        if otp_decrypt(phrase) is not None:
+                            decrypt_the_phrase(otp_decrypt(phrase), i)
+                        else:
+                            wrong_input()
+                else:
+                    wrong_input()
+            except:
+                wrong_input()
 
             # Ask user if to continue with more messages
             ask = input("Continue? y/n ")
             if ask == "n":
                 break
+            elif ask == "y":
+                continue
             else:
-                clear_screen()
+                wrong_input()
+                break
         else:
             # Validation if selection is not a number clear the screen
             # and ask again
