@@ -1,4 +1,4 @@
-from encryption.caesar import Cipher
+from encryption.cipher import Cipher
 
 
 class Monoalphabetic(Cipher):
