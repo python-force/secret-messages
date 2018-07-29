@@ -159,10 +159,12 @@ def clear_screen():
     else:
         os.system('clear')
 
+
 def wrong_input():
     crypting_phrase = "Cipher is unable to be processed. " \
                       "Please check your message."
     crypting_result(crypting_phrase)
+
 
 # Script doesn't execute when imported
 if __name__ == '__main__':
